@@ -8,7 +8,7 @@ $("#cat").on("click", function () {
     $.ajax({
             url: queryURL,
             method: "GET"
-        })
+    })
 
         // callback
         .done(function (response) {
@@ -41,7 +41,7 @@ $("#dog").on("click", function () {
     $.ajax({
             url: queryURL,
             method: "GET"
-        })
+    })
 
         // callback
         .done(function (response) {
@@ -73,7 +73,7 @@ $("#bird").on("click", function () {
     $.ajax({
             url: queryURL,
             method: "GET"
-        })
+    })
 
         // callback
         .done(function (response) {
