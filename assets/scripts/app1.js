@@ -1,3 +1,9 @@
+// TODO: 
+// Add gif pausing functionality
+// Add gif search functionality, that adds a button to produces related gifs.
+
+
+
 // Adding click event listen listener to all buttons
 $("button").on("click", function() {
     // Grabbing and storing the data-animal property value from the button
