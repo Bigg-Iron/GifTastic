@@ -1,97 +1,51 @@
-// CAT Button
-// ============================================================================================
-$("#cat").on("click", function () {
+// TODO: 
+// Add gif pausing functionality
+// Add gif search functionality, that adds a button to produces related gifs.
 
-    var queryURL = "https://api.giphy.com/v1/gifs/random?api_key=dc6zaTOxFJmzC&tag=cats";
 
-    // ajax request
+
+// Adding click event listen listener to all buttons
+$("button").on("click", function() {
+    // Grabbing and storing the data-animal property value from the button
+    var animal = $(this).attr("data-animal");
+
+    // Constructing a queryURL using the animal name
+    var queryURL = "https://api.giphy.com/v1/gifs/search?q=" +
+      animal + "&api_key=dc6zaTOxFJmzC&limit=10";
+
+    // Performing an AJAX request with the queryURL
     $.ajax({
-            url: queryURL,
-            method: "GET"
-    })
-        // callback
-        .done(function (response) {
-            console.log(response);
-            //
-            var imageUrl = response.data.image_original_url;
+        url: queryURL,
+        method: "GET"
+      })
+      // After data comes back from the request
+      .done(function(response) {
+        console.log(queryURL);
 
-            //
-            var catImage = $("<img>");
+        console.log(response);
+        // storing the data from the AJAX request in the results variable
+        var results = response.data;
 
-            //
-            catImage.attr("src", imageUrl);
-            catImage.attr("alt", "cat image");
+        // Looping through each result item
+        for (var i = 0; i < results.length; i++) {
 
-            //
-            $("#animals").prepend(catImage);
+          // Creating and storing a div tag
+          var animalDiv = $("<div>");
 
-        });
-});
+          // Creating a paragraph tag with the result item's rating
+          var p = $("<p>").text("Rating: " + results[i].rating);
 
+          // Creating and storing an image tag
+          var animalImage = $("<img>");
+          // Setting the src attribute of the image to a property pulled off the result item
+          animalImage.attr("src", results[i].images.fixed_height.url);
 
+          // Appending the paragraph and image tag to the animalDiv
+          animalDiv.append(p);
+          animalDiv.append(animalImage);
 
-// DOG Button
-// ============================================================================================
-$("#dog").on("click", function () {
-
-    var queryURL = "https://api.giphy.com/v1/gifs/random?api_key=dc6zaTOxFJmzC&tag=dogs";
-
-    // ajax request
-    $.ajax({
-            url: queryURL,
-            method: "GET"
-    })
-
-        // callback
-        .done(function (response) {
-            console.log(response);
-            //
-            var imageUrl = response.data.image_original_url;
-
-            //
-            var dogImage = $("<img>");
-
-            //
-            dogImage.attr("src", imageUrl);
-            dogImage.attr("alt", "dog image");
-
-            //
-            $("#animals").prepend(dogImage);
-
-        });
-});
-
-
-// BIRD Button
-// ============================================================================================
-$("#bird").on("click", function () {
-
-    var queryURL = "https://api.giphy.com/v1/gifs/random?api_key=dc6zaTOxFJmzC&tag=birds";
-
-    // ajax request
-    $.ajax({
-            url: queryURL,
-            method: "GET"
-    })
-
-        // callback
-        .done(function (response) {
-            console.log(response);
-            //
-            var imageUrl = response.data.image_original_url;
-
-            //
-            var birdImage = $("<img>");
-
-            //
-            birdImage.attr("src", imageUrl);
-            birdImage.attr("alt", "dog image");
-
-            //
-            $("#animals").prepend(birdImage);
-
-        });
-});
-
-
-
+          // Prependng the animalDiv to the HTML page in the "#gifs-appear-here" div
+          $("#animals").prepend(animalDiv);
+        }
+      });
+  });
