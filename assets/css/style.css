@@ -7,3 +7,10 @@
     margin: 3%;
     padding: 3%;
 }
+
+.col-sm-12 {
+    width: 30%;
+    margin-left: 3%;
+}
+
+
