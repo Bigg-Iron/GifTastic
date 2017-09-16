@@ -14,3 +14,11 @@
 }
 
 
+.panel-primary {
+    border-color: #7EA8CA;
+}
+
+.panel-primary>.panel-heading {
+    color: #fff;
+    background-color: #7EA8CA;
+}
